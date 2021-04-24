@@ -1,10 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {deleteUser, getData} from "./actions";
+import {deleteItem, getData} from "./actions";
 
 function App() {
   const dispather = useDispatch();
-  const users = useSelector(state => state.users);
+  const database = useSelector(state => state.database);
   const load = useSelector(state => state.loading)
 
   useEffect(()=>{
@@ -12,13 +12,13 @@ function App() {
   },[])
 
   function handleDelete(id){
-    dispather(deleteUser(id))
+    dispather(deleteItem(id))
   }
 
   return (
     <div className="app">
       <h1>
-        Users
+        Фотокарточки
       </h1>
       <div className="wrapper">
         {load ?
@@ -28,19 +28,18 @@ function App() {
                 </div>
                 <div className="spinner"></div>
             </div> :
-            users.map((user)=>{
+            database.map((data)=>{
               return (
-                  <div className='user' key={user.id}>
-                    <div className='avatar'>
-                      <img src={user.avatar} alt=""/>
+                  <div className='card' key={data.id}>
+                    <div className='img'>
+                      <img src={data.url} alt=""/>
                         <button onClick={()=>{
-                            handleDelete(user.id)
+                            handleDelete(data.id)
                         }}>
                             &#10006;
                         </button>
                     </div>
-                    <div className='name'>{user.first_name + ' ' + user.last_name}</div>
-                    <div className='email'>{user.email}</div>
+                    <div className='title'>{data.title}</div>
                   </div>
               )
             })

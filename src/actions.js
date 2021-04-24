@@ -3,7 +3,7 @@ export function getData () {
         dispather({
             type: 'START-LOADING'
         })
-        fetch('https://reqres.in/api/users/')
+        fetch('https://jsonplaceholder.typicode.com/photos/?_limit=50')
             .then(responce => responce.json())
             .then((json)=>{
                 dispather({
@@ -14,14 +14,15 @@ export function getData () {
     }
 }
 
-export function deleteUser (id) {
+export function deleteItem (id) {
     return function (dispather) {
-        fetch(`https://reqres.in/api/users/${id}`, {
-            method: 'DELETE'
-        }).then(() => {
-            dispather({
-                type: 'DELETE',
-                payload: id
+        fetch(`https://jsonplaceholder.typicode.com/photos/${id}`, {
+            method: 'DELETE'})
+            .then((responce) => responce.json())
+            .then(() => {
+                dispather({
+                    type: 'DELETE',
+                    payload: id
             })
         })
     }

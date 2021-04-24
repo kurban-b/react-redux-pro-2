@@ -7,7 +7,7 @@ import {applyMiddleware, createStore} from "redux";
 import thunk from "redux-thunk";
 
 const initialState = {
-    users: [],
+    database: [],
     loading: true
 }
 
@@ -21,10 +21,10 @@ function reducer(state = initialState, action) {
         case 'getUsers':
             return {
                 ...state,
-                users: action.payload.data
+                database: action.payload
             }
         case 'DELETE':
-            state.users = state.users.filter((item) => item.id !== action.payload);
+            state.database = state.database.filter((item) => item.id !== action.payload);
         default:
             return state;
     }
