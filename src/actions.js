@@ -3,14 +3,17 @@ export function getData () {
         dispather({
             type: 'START-LOADING'
         })
-        fetch('https://jsonplaceholder.typicode.com/photos/?_limit=50')
-            .then(responce => responce.json())
-            .then((json)=>{
-                dispather({
-                    type: 'getUsers',
-                    payload: json
+        setTimeout(()=>{
+            fetch('https://jsonplaceholder.typicode.com/photos/?_limit=50')
+                .then(responce => responce.json())
+                .then((json)=>{
+                    dispather({
+                        type: 'getUsers',
+                        payload: json
+                    })
                 })
-            })
+        },2000) //таймоут добавил чтоб видеть прелоадер - для демонстрации
+
     }
 }
 

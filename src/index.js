@@ -16,12 +16,13 @@ function reducer(state = initialState, action) {
         case 'START-LOADING':
         return {
                 ...state,
-                loading: false
+                loading: true
             }
         case 'getUsers':
             return {
                 ...state,
-                database: action.payload
+                database: action.payload,
+                loading: false
             }
         case 'DELETE':
             state.database = state.database.filter((item) => item.id !== action.payload);
